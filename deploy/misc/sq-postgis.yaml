@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sq-postgis
+spec:
+  selector:
+    app: sq-postgis
+  ports:
+  - name: sq-postgis-ui
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sq-postgis
+  labels:
+    app: sq-postgis
+spec:
+  selector:
+    matchLabels:
+      app: sq-postgis
+  template:
+    metadata:
+      labels:
+        app: sq-postgis
+    spec:
+      containers:
+      - name: sq-postgis
+        image: bde2020/postgis
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5432
+

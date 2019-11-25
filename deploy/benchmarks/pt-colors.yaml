@@ -1,0 +1,12 @@
+apiVersion: kobebenchmark.kobe.com/v1alpha1
+kind: KobeBenchmark
+metadata:
+  name: sq-colors
+spec:
+  datasets:
+    - name: colors
+    - name: pt-strabon
+  queries:
+    - name: q
+      language: sparql
+      queryString: ""

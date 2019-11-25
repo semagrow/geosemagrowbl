@@ -1,0 +1,15 @@
+apiVersion: kobedataset.kobe.com/v1alpha1
+kind: KobeDataset
+metadata:
+  name: tmp-strabon
+spec:
+  image: antru6/strabon
+  env:
+  - name: STRABON_CONNECTION_hostname
+    value: "tmp-postgis"
+  - name: STRABON_CONNECTION_port
+    value: "5432"
+  forceLoad: true
+  sparqlEnding: /strabon/Query
+  count: 1
+  port: 8080

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pt-postgis
+spec:
+  selector:
+    app: pt-postgis
+  ports:
+  - name: pt-postgis-ui
+    protocol: TCP
+    port: 5432
+    targetPort: 5432
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pt-postgis
+  labels:
+    app: pt-postgis
+spec:
+  selector:
+    matchLabels:
+      app: pt-postgis
+  template:
+    metadata:
+      labels:
+        app: pt-postgis
+    spec:
+      containers:
+      - name: pt-postgis
+        image: bde2020/postgis
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5432
+
