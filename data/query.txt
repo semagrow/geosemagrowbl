@@ -1,0 +1,24 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.org/>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX opengis: <http://www.opengis.net/def/uom/OGC/1.0/>
+PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
+PREFIX xmls: <http://www.w3.org/2001/XMLSchema#>
+PREFIX strdf: <http://strdf.di.uoa.gr/ontology#>
+SELECT ?x ?y {
+  ?x rdf:type ex:point .
+  ?y rdf:type ex:point .
+  ?x ex:color ex:blue .
+  ?y ex:color ex:red .
+  ?x geosparql:asWKT ?pt1 .
+  ?y geosparql:asWKT ?pt2 .
+  FILTER (geof:distance(?pt1, ?pt2, opengis:metre) < "1000000.0"^^xmls:double)
+  ?p rdf:type ex:square .
+  ?q rdf:type ex:square .
+  ?p ex:color ex:green .
+  ?q ex:color ex:green .
+  ?p geosparql:asWKT ?sq1 .
+  ?q geosparql:asWKT ?sq2 .
+  FILTER strdf:within(?pt1, ?sq1)
+  FILTER strdf:within(?pt2, ?sq2)
+}
