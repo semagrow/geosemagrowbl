@@ -16,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,9 +98,9 @@ public class JsonQueryResultConverter {
     public static void main(String[] args) throws ParseException, IOException {
 
         Option help = new Option("help", "print this message");
-        Option query = OptionBuilder.withArgName("query")
+        Option query = OptionBuilder.withArgName("path")
                 .hasArg()
-                .withDescription("SPARQL query that results are the json file" )
+                .withDescription("File that contains SPARQL query that results are the json file" )
                 .create("query");
         Option jsonPath = OptionBuilder.withArgName("path")
                 .hasArg()
@@ -123,7 +125,7 @@ public class JsonQueryResultConverter {
             JsonQueryResultConverter converter = new JsonQueryResultConverter();
             FileReader iw = new FileReader(line.getOptionValue(jsonPath.getOpt()));
             FileWriter ow = new FileWriter(line.getOptionValue(rdfPath.getOpt()));
-            String q = line.getOptionValue(query.getOpt());
+            String q = new String(Files.readAllBytes(Paths.get(line.getOptionValue(query.getOpt()))), "UTF-8");
             converter.convertJsonToRdf(q, iw, ow);
             ow.close();
             iw.close();
