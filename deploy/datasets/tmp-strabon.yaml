@@ -3,7 +3,7 @@ kind: KobeDataset
 metadata:
   name: tmp-strabon
 spec:
-  image: antru6/strabon
+  image: antru6/gsgbl-strabon
   env:
   - name: STRABON_CONNECTION_hostname
     value: "tmp-postgis"

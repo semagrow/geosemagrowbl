@@ -1,7 +1,7 @@
 apiVersion: kobebenchmark.kobe.com/v1alpha1
 kind: KobeBenchmark
 metadata:
-  name: sq-colors
+  name: pt-colors
 spec:
   datasets:
     - name: colors

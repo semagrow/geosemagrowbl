@@ -1,7 +1,7 @@
 apiVersion: kobeexperiment.kobe.com/v1alpha1
 kind: KobeExperiment
 metadata:
-  name: kobeexp1
+  name: kobeexp-ptcl
 spec:
   benchmark: pt-colors
   federator: semagrow

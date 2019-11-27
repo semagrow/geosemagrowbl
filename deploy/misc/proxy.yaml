@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: proxy
+spec:
+  selector:
+    app: proxy
+  ports:
+  - name: proxy-ui
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy
+  labels:
+    app: proxy
+spec:
+  selector:
+    matchLabels:
+      app: proxy
+  template:
+    metadata:
+      labels:
+        app: proxy
+    spec:
+      containers:
+      - name: proxy
+        image: antru6/gsgbl-proxy:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /kobe/dataset
+          name: nfs
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-96q6c
+          readOnly: true
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: kobepvc
+      - name: default-token-96q6c
+        secret:
+          defaultMode: 420
+          secretName: default-token-96q6c
+
