@@ -8,6 +8,8 @@ app = flask.Flask(__name__)
 @app.route('/', methods=["POST"])
 
 def proxy():
+	if os.path.exists("/kobe/dataset/gsgbl/dataLoaded"):
+		os.remove("/kobe/dataset/gsgbl/dataLoaded")
 	form_data = flask.request.form
 	if 'query' not in form_data:
 		return 'No query in form data'
@@ -17,8 +19,8 @@ def proxy():
 		with open('/kobe/dataset/gsgbl/'+key, "w") as file:
 			file.write(value)
 	r = requests.post('http://tmp-strabon.default.svc.cluster.local:8080/strabon/Query', data={'query': form_data['query']})
-	print('waiting for /kobe/dataset/gsgbl/.dataLoaded')
-	while not os.path.exists('/kobe/dataset/gsgbl/.dataLoaded'):
+	print('waiting for /kobe/dataset/gsgbl/dataLoaded')
+	while not os.path.exists('/kobe/dataset/gsgbl/dataLoaded'):
 		time.sleep(5)
 	return r.text
 
