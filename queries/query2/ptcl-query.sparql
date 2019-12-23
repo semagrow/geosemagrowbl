@@ -13,5 +13,5 @@ SELECT * {
   ?x geosparql:asWKT ?pt1 .
   ?y geosparql:asWKT ?pt2 .
   FILTER (str(?color1) != str(?color2))
-  FILTER (geof:distance(?pt1, ?pt2, opengis:metre) < "1000000.0"^^xmls:double)
+  FILTER (geof:distance(?pt1, ?pt2, opengis:metre) < '1000000.0'^^xmls:double)
 }

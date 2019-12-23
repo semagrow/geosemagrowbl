@@ -6,19 +6,17 @@ do
   sleep 2
 done
 
+echo "$PTCL_QUERY" > /kobe/dataset/gsgbl/ptcl-query
+echo "$SQCL_QUERY" > /kobe/dataset/gsgbl/sqcl-query
+
 while true
 do
-
-  until [ -f "/kobe/dataset/gsgbl/ptcl-query" ]
+  
+  until [ -f "/kobe/dataset/gsgbl/evaluateQuery" ]
   do
     sleep 2
   done
-
-  until [ -f "/kobe/dataset/gsgbl/sqcl-query" ]
-  do
-    sleep 2
-  done
-
+  
   curl -X POST -H "Accept: application/json" \
       --data-urlencode "query=`cat /kobe/dataset/gsgbl/ptcl-query`" \
       http://kobeexp-ptcl.default.svc.cluster.local:8080/SemaGrow/sparql > /tmp/dump1.json
@@ -50,8 +48,7 @@ do
   sleep 2
 
   touch /kobe/dataset/gsgbl/dataLoaded
-  rm /kobe/dataset/gsgbl/ptcl-query
-  rm /kobe/dataset/gsgbl/sqcl-query
+  rm /kobe/dataset/gsgbl/evaluateQuery
 
 done
 

@@ -5,7 +5,7 @@ PREFIX opengis: <http://www.opengis.net/def/uom/OGC/1.0/>
 PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
 PREFIX xmls: <http://www.w3.org/2001/XMLSchema#>
 PREFIX strdf: <http://strdf.di.uoa.gr/ontology#>
-SELECT ?x ?y {
+SELECT DISTINCT ?x ?y {
   ?x rdf:type ex:point .
   ?y rdf:type ex:point .
   ?x ex:color ?color1 .
@@ -13,7 +13,7 @@ SELECT ?x ?y {
   ?x geosparql:asWKT ?pt1 .
   ?y geosparql:asWKT ?pt2 .
   FILTER (str(?color1) != str(?color2))
-  FILTER (geof:distance(?pt1, ?pt2, opengis:metre) < "1000000.0"^^xmls:double)
+  FILTER (geof:distance(?pt1, ?pt2, opengis:metre) < '1000000.0'^^xmls:double)
   ?p rdf:type ex:square .
   ?q rdf:type ex:square .
   ?p ex:color ?color3 .
