@@ -91,6 +91,6 @@ proxy-public   NodePort   xxx.xxx.xxx.xxx   <none>        80:<NODE_PORT>/TCP   x
 Finally, you can issue your query:
 ```sh
 cd ../queries/query2
-./runQuery.sh http://<NODE_IP>:<SERVICE_PORT>
+./runQuery.sh http://<NODE_IP>:<NODE_PORT>
 ```
 where `<NODE_IP>` is the IP of any node of your cluster and `<NODE_PORT>` the exposed port obtained previously.
