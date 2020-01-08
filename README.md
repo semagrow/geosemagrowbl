@@ -1,6 +1,6 @@
 # GeoSemagrowBL
 
-GeoSemaGrowBL is a demonstrator for federated geospatial query processing. The demonstrator performs a federated GeoSPARQL query over three endpoints. The first endpoint is a regular SPARQL endpoint that contains RDF data and the remaining two endpoints are GeoSPARQL endpoints that contain geospatial RDF data. For our implementation, we make use of [Semagrow](http://semagrow.github.io/), a state-of-the-art federated SPARQL query processing engine.
+GeoSemagrowBL is a demonstrator for federated geospatial query processing. The demonstrator performs a federated GeoSPARQL query over three endpoints. The first endpoint is a regular SPARQL endpoint that contains RDF data and the remaining two endpoints are GeoSPARQL endpoints that contain geospatial RDF data. For our implementation, we make use of [Semagrow](http://semagrow.github.io/), a state-of-the-art federated SPARQL query processing engine.
 
 ### Prerequisites
 
@@ -84,8 +84,8 @@ kubectl get svc proxy-public
 
 The response should look like this:
 ```
-NAME           TYPE       CLUSTER-IP        EXTERNAL-IP   PORT(S)                 AGE
-proxy-public   NodePort   xxx.xxx.xxx.xxx   <none>        80:<SERVICE_PORT>/TCP   xxx
+NAME           TYPE       CLUSTER-IP        EXTERNAL-IP   PORT(S)              AGE
+proxy-public   NodePort   xxx.xxx.xxx.xxx   <none>        80:<NODE_PORT>/TCP   xxx
 ```
 
 Finally, you can issue your query:
@@ -93,4 +93,4 @@ Finally, you can issue your query:
 cd ../queries/query2
 ./runQuery.sh http://<NODE_IP>:<SERVICE_PORT>
 ```
-where `<NODE_IP>` is the IP of any node of your cluster and `<SERVICE_PORT>` the exposed port obtained previously.
+where `<NODE_IP>` is the IP of any node of your cluster and `<NODE_PORT>` the exposed port obtained previously.
